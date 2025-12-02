@@ -14,6 +14,7 @@ include("includes/header.php")
 
 <div class="min-h-screen flex flex-col items-center justify-center bg-gray-100">
 
+
     <?php if (isset($_SESSION['message'])): ?>
         <div class="w-full max-w-sm mb-4">
             <div class="flex items-center justify-between bg-red-100 text-red-700 px-4 py-3 rounded-lg shadow">
