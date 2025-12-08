@@ -60,9 +60,27 @@ $(document).ready(function() {
     $(document).on('click', '.updateQty', function() {
         
         var qty = $(this).closest('.product-data').find('.qty-input').val();
-        var prod_id = $(this).val()
+        var prod_id = $(this).closest('.product-data').find('.prodid').val();
 
-        alert(qty)
+        $.ajax({
+            method: "POST",
+            url: "functions/handlecart.php",
+            data: {
+                "id_produk": prod_id,
+                "prod_qty": qty,
+                "scope": "update"
+            },
+            dataType: 'json',
+            success: function (response) {
+                // if (response.status == 201) {
+                //     showToast(response.message);
+                // } else if (response.status == 401) {
+                //     showToast(response.message);
+                // } else {
+                //     showToast(response.message);
+                // }
+            }
+        });
 
     })
 })

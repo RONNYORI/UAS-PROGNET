@@ -2,6 +2,7 @@
 session_start(); 
 include("includes/header.php");
 include("functions/userFunction.php");
+include("middleware/cartMiddleware.php");
 ?>
 
 <div class="mt-24 max-w-[1400px] mx-auto px-4 ">
@@ -26,11 +27,12 @@ include("functions/userFunction.php");
             <!-- Name -->
             <div class="flex-1 ml-4">
                 <h4 class="font-semibold text-gray-800"><?= $cart['nama_produk'] ?></h4>
-                <p class="text-sm text-gray-500">Rp <?= number_format($cart['harga_jual']) ?></p>
+                <p class="text-sm text-gray-500">Rp <?= number_format($cart['harga_jual'], 0,  ',', '.') ?></p>
             </div>
 
             <!-- Quantity -->
             <div class="flex items-center gap-2">
+                <input type="hidden" class="prodid" value="<?= $cart['id_produk'] ?>">
                 <button class="decrement_btn px-2 py-1 bg-gray-200 rounded updateQty">-</button>
                 <input 
                     type="text" 

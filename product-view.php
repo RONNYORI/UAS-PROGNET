@@ -76,11 +76,18 @@ if (isset($_GET['product'])) {
                             <span>Save 6% right now</span>
                     </div>
 
-                    <div>
-                        <button class="decrement_btn">-</button>
-                        <input type="text" class='qty-input' value="1">
-                        <button class="increment_btn">+</button>
+                    <div class="flex items-center gap-2">
+                        <button class="decrement_btn bg-gray-200 px-3 py-1 rounded">-</button>
+                        
+                        <input 
+                            type="text" 
+                            class="qty-input w-12 text-center border border-gray-300 rounded" 
+                            value="1"
+                        >
+                        
+                        <button class="increment_btn bg-gray-200 px-3 py-1 rounded">+</button>
                     </div>
+
 
                     <!-- Action Buttons -->
                     <div class="space-y-3">
