@@ -18,7 +18,7 @@
 
     function getProductByCategory($categoryId){
         global $con;
-        $query = "SELECT * FROM tb_produk WHERE id_kategori='$categoryId' AND status='0'";
+        $query = "SELECT * FROM tb_produk WHERE id_kategori='$categoryId' AND status='0' ORDER BY id_produk DESC";
         return $query_run = mysqli_query($con, $query);
     }
 

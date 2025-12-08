@@ -35,7 +35,7 @@ if (isset($_SESSION['auth'])) {
                 
             break;
             
-            case "update";
+            case "update":
                 $prod_id = mysqli_real_escape_string($con, $_POST['id_produk']);
                 $prod_qty = mysqli_real_escape_string($con, $_POST['prod_qty']);
                 $user_id = $_SESSION['auth_user']['id_user'];
@@ -61,7 +61,36 @@ if (isset($_SESSION['auth'])) {
                     
                 }
 
+            break;
+
+            case "delete":
+                $cart_id = mysqli_real_escape_string($con, $_POST['id_cart']);
+
+                $user_id = $_SESSION['auth_user']['id_user'];
+
+                $check_existing_cart = "SELECT * FROM tb_carts WHERE id_cart='$cart_id' AND id_user='$user_id'";
+                $check_existing_cart_run = mysqli_query($con, $check_existing_cart);
+
+                if (mysqli_num_rows($check_existing_cart_run) > 0) {
+
+                    $delete_query = "DELETE FROM tb_carts WHERE id_cart='$cart_id'";
+                    $delete_query_run = mysqli_query($con, $delete_query);
+
+                    if ($delete_query_run) {
+                        echo json_encode(['status' => 201, 'message' => 'Deleted from cart']);
+                    } else {
+                        echo json_encode(['status' => 500, 'message' => 'Something went wrong']);
+
+                    }
+
+                } else {
+
+                    echo json_encode(['status' => 500, 'message' => 'Something went wrong']);
+                    
+                }
+
                 break;
+
                 
             default:
                 echo json_encode(['status' => 500, 'message' => 'Invalid action']);

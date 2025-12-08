@@ -1,7 +1,9 @@
 
 $(document).ready(function() {
     
-    $('.increment_btn').click(function(e){
+    // $('.increment_btn').click(function(e){
+    $(document).on('click', '.increment_btn', function(e) {
+
         e.preventDefault();
 
         var qty = $(this).closest('.product-data').find('.qty-input').val()
@@ -15,7 +17,7 @@ $(document).ready(function() {
     });
 
 
-    $('.decrement_btn').click(function(e){
+    $(document).on('click', '.decrement_btn', function(e) {
         e.preventDefault();
 
         var qty = $(this).closest('.product-data').find('.qty-input').val()
@@ -28,7 +30,8 @@ $(document).ready(function() {
         }
     })
 
-    $('.add-to-cart').click(function(e){
+    $(document).on('click', '.add-to-cart', function(e) {
+
         e.preventDefault();
 
         var qty = $(this).closest('.product-data').find('.qty-input').val()
@@ -46,8 +49,6 @@ $(document).ready(function() {
             dataType: 'json',
             success: function (response) {
                 if (response.status == 201) {
-                    showToast(response.message);
-                } else if (response.status == 401) {
                     showToast(response.message);
                 } else {
                     showToast(response.message);
@@ -72,13 +73,31 @@ $(document).ready(function() {
             },
             dataType: 'json',
             success: function (response) {
-                // if (response.status == 201) {
-                //     showToast(response.message);
-                // } else if (response.status == 401) {
-                //     showToast(response.message);
-                // } else {
-                //     showToast(response.message);
-                // }
+            }
+        });
+
+    })
+
+    $(document).on('click', '.deleteItem', function() {
+        
+        var cart_id = $(this).val()
+
+
+        $.ajax({
+            method: "POST",
+            url: "functions/handlecart.php",
+            data: {
+                "id_cart": cart_id,
+                "scope": "delete"
+            },
+            dataType: 'json',
+            success: function (response) {
+                if (response.status == 201) {
+                    showToast(response.message);
+                    $('#mycart').load(location.href + " #mycart")
+                } else {
+                    showToast(response.message);
+                }
             }
         });
 
