@@ -11,6 +11,13 @@ if (isset($_GET['product'])) {
     $product = $user->getSlugActive("tb_produk", $product_slug);
 
     if ($product) {
+
+
+$diskon_persen = 0;
+if ($product['harga_asli'] > $product['harga_jual'] && $product['harga_asli'] > 0) {
+    $diskon_persen = round((($product['harga_asli'] - $product['harga_jual']) / $product['harga_asli']) * 100);
+}
+
 ?>
     <div class="max-w-[1400px] mx-auto px-6">
 
@@ -36,7 +43,7 @@ if (isset($_GET['product'])) {
                 </div>
                 <div class="flex items-center gap-2 text-slate-500">
                     <TagIcon size={14} />
-                    <p>Save 10% right now</p>
+                    <p>Save <?= $diskon_persen ?>% right now</p>
                 </div>
                 <div class="flex items-end gap-5 mt-10">
                             <div class="flex flex-col gap-3">

@@ -187,29 +187,51 @@ public function searchProducts($keyword){
         return $cart;
     }
 
-    // Method untuk get orders user
-    // public function getOrders($userId){
-    //     $query = "SELECT * FROM tb_orders WHERE id_user = ? ORDER BY id_order DESC";
-    //     $stmt = $this->conn->prepare($query);
-        
-    //     if(!$stmt){
-    //         return [];
-    //     }
+    public function getDiscountedProducts($min_discount = 20, $order_by = 'diskon DESC') {
+        $query = "
+            SELECT *,
+                ROUND(((harga_asli - harga_jual) / harga_asli * 100), 0) AS diskon
+            FROM tb_produk 
+            WHERE status = '0'
+            AND harga_asli > harga_jual 
+            AND harga_asli > 0
+            AND ((harga_asli - harga_jual) / harga_asli * 100) >= ?
+            ORDER BY $order_by
+        ";
 
-    //     $stmt->bind_param("i", $userId);
-    //     $stmt->execute();
-    //     $result = $stmt->get_result();
-        
-    //     $orders = [];
-    //     if($result->num_rows > 0){
-    //         while($row = $result->fetch_assoc()){
-    //             $orders[] = $row;
-    //         }
-    //     }
-        
-    //     $stmt->close();
-    //     return $orders;
-    // }
+        $stmt = $this->conn->prepare($query);
+        $stmt->bind_param("i", $min_discount);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        $products = [];
+        while ($row = $result->fetch_assoc()) {
+            $products[] = $row;
+        }
+
+        return $products;
+    }
+
+public function getTrendingNumber() {
+    $query = "SELECT * FROM tb_produk WHERE popularitas = 1";
+    $stmt = $this->conn->prepare($query);
+
+    if(!$stmt){
+        return 0; // Kembalikan 0 jika gagal
+    }
+
+    $stmt->execute();
+    $result = $stmt->get_result();
+    
+    // Ambil jumlah barisnya saja
+    $total = $result->num_rows;
+
+    $stmt->close();
+    return $total; 
+}
+
+
+
 
     public function getOrders($userId){
     $query = "
