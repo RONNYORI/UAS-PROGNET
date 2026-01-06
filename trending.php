@@ -9,7 +9,7 @@ $user = new User();
 ?>
 
         <div class="mt-24 max-w-[1400px] mx-auto px-4">
-            <h2 class="text-3xl font-bold text-start mb-6">Trending Products</h2>
+            <h2 class="text-3xl font-bold text-start mb-6">Produk populer</h2>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-14 mt-14">
 
@@ -47,7 +47,7 @@ $user = new User();
                 <?php
                     }
                 } else {
-                    echo "<p class='text-gray-600 col-span-4 text-center'>No data available</p>";
+                    echo "<p class='text-gray-600 col-span-4 text-center'>Data tidak tersedia</p>";
                 }
                 ?>
             </div>
