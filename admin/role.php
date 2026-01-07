@@ -11,8 +11,7 @@ $staffUsers = $adminObj->getStaffUsers();
 $allUsers = $adminObj->getAllUsersWithRole();  
 $roles = $adminObj->getAllRoles();
 
-$message = $_SESSION['message'] ?? '';
-unset($_SESSION['message']);
+
 ?>
 
 <main class="flex-1 p-8 md:pt-8 pt-24 bg-gray-50 min-h-screen">
@@ -22,11 +21,7 @@ unset($_SESSION['message']);
         <p class="text-gray-500 mt-1">Kelola hak akses pengguna</p>
     </div>
 
-    <?php if ($message): ?>
-        <div class="bg-green-100 border border-green-400 text-green-700 px-6 py-4 rounded-lg mb-8">
-            <?= htmlspecialchars($message) ?>
-        </div>
-    <?php endif; ?>
+
 
     <div class="bg-white rounded-xl border shadow-sm overflow-hidden mb-10">
         <div class="p-6 border-b bg-gray-50">

@@ -1,5 +1,6 @@
 <?php
 session_start();
+include('../functions/adminFunctions.php');  // ← wajib untuk redirectAdmin()
 require_once '../config/class-useradmin.php';
 
 $adminObj = new UserAdmin();
@@ -9,16 +10,12 @@ if (isset($_POST['update_role'])) {
     $new_role = (int)($_POST['new_role'] ?? -1);
 
     if ($id_user <= 0 || $new_role < 0) {
-        $_SESSION['message'] = "Data tidak valid";
+        redirectAdmin("../role.php", "Data tidak valid");
     } else {
         $result = $adminObj->updateUserRole($id_user, $new_role);
-        $_SESSION['message'] = $result['message'];
+        redirectAdmin("../role.php", $result['message']);
     }
-
-    header("Location: ../role.php");
-    exit();
 }
 
-
-header("Location: ../role.php");
-exit();
+// Jika akses langsung (tidak ada POST)
+redirectAdmin("../role.php", "Akses tidak valid");

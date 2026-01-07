@@ -7,6 +7,18 @@ function redirectAdmin($path, $message){
     exit();
 }
 
+function redirectAdminSuccess($path, $message) {
+    $_SESSION['success'] = $message;
+    header("Location: " . $path);
+    exit();
+}
+
+function redirectAdminError($path, $message) {
+    $_SESSION['error'] = $message;
+    header("Location: " . $path);
+    exit();
+}
+
 function getOrders() {
     global $con;
     $query = "SELECT * FROM tb_orders 

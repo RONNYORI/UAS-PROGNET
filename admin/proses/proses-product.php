@@ -1,5 +1,6 @@
 <?php
 session_start();
+include('../functions/adminFunctions.php');  // ← pastikan include ini ada
 require_once '../config/class-product.php';
 
 $product = new Product();
@@ -8,14 +9,9 @@ if (isset($_POST['add_product_btn'])) {
     $result = $product->create($_POST, $_FILES);
 
     if ($result['status']) {
-        $_SESSION['success'] = $result['message'];
-        header("Location: ../products.php");
-        exit();
-        
+        redirectAdmin("../products.php", $result['message']);  // success
     } else {
-        $_SESSION['error'] = $result['message'];
-        header("Location: ../add-product.php");
-        exit();
+        redirectAdmin("../add-product.php", $result['message']);  // error
     }
 }
 
@@ -24,13 +20,9 @@ else if (isset($_POST['update_product_btn'])) {
     $result = $product->update($id, $_POST, $_FILES);
 
     if ($result['status']) {
-        $_SESSION['success'] = $result['message'];
-        header("Location: ../products.php");
-        exit();
+        redirectAdmin("../products.php", $result['message']);
     } else {
-        $_SESSION['error'] = $result['message'];
-        header("Location: ../edit-products.php?id=$id");
-        exit();
+        redirectAdmin("../edit-product.php?id=$id", $result['message']);
     }
 }
 
@@ -38,13 +30,9 @@ else if (isset($_POST['delete_product_btn'])) {
     $id = (int)($_POST['product_id'] ?? 0);
     $result = $product->delete($id);
 
-    $_SESSION['success'] = $result['message']; 
-    header("Location: ../products.php");
-    exit();
+    redirectAdmin("../products.php", $result['message']);
 }
 
 else {
-    $_SESSION['error'] = "Akses tidak valid";
-    header("Location: ../add-product.php");
-    exit();
+    redirectAdmin("../add-product.php", "Akses tidak valid");
 }
