@@ -16,40 +16,6 @@ CREATE DATABASE /*!32312 IF NOT EXISTS*/`db_ecom` /*!40100 DEFAULT CHARACTER SET
 
 USE `db_ecom`;
 
-/*Table structure for table `order_items` */
-
-DROP TABLE IF EXISTS `order_items`;
-
-CREATE TABLE `order_items` (
-  `id_order_item` int NOT NULL AUTO_INCREMENT,
-  `id_order` int NOT NULL,
-  `id_produk` int NOT NULL,
-  `qty` int NOT NULL,
-  `harga` int NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id_order_item`)
-) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
-/*Data for the table `order_items` */
-
-insert  into `order_items`(`id_order_item`,`id_order`,`id_produk`,`qty`,`harga`,`created_at`) values 
-(8,4,4,2,25000000,'2025-12-09 14:59:32'),
-(9,4,6,1,16499000,'2025-12-09 14:59:32'),
-(10,5,6,1,16499000,'2025-12-09 15:23:04'),
-(11,6,7,1,17249000,'2025-12-09 17:48:49'),
-(12,7,6,1,16499000,'2025-12-09 18:40:54'),
-(13,7,7,3,17249000,'2025-12-09 18:40:54'),
-(14,8,6,2,16499000,'2025-12-09 20:24:45'),
-(15,8,7,2,17249000,'2025-12-09 20:24:45'),
-(16,10,4,3,25000000,'2025-12-09 20:52:03'),
-(17,10,6,1,16499000,'2025-12-09 20:52:03'),
-(18,11,6,1,16499000,'2025-12-09 20:53:09'),
-(19,12,31,1,18499000,'2025-12-26 22:57:37'),
-(20,13,31,2,18499000,'2025-12-26 23:48:29'),
-(21,14,31,1,18499000,'2025-12-26 23:50:00'),
-(22,15,31,6,18499000,'2025-12-26 23:53:17'),
-(23,15,27,9,1999000,'2025-12-26 23:53:17');
-
 /*Table structure for table `tb_alamat` */
 
 DROP TABLE IF EXISTS `tb_alamat`;
@@ -61,13 +27,15 @@ CREATE TABLE `tb_alamat` (
   `kota` varchar(255) DEFAULT NULL,
   `provinsi` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id_alamat`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 /*Data for the table `tb_alamat` */
 
 insert  into `tb_alamat`(`id_alamat`,`id_user`,`alamat`,`kota`,`provinsi`) values 
 (1,8,'Jln. Tukad Batanghari ','Denpasar','Bali'),
-(3,8,'jalan babi anjing','Denpasar','Bali');
+(3,8,'jalan babi anjing','Denpasar','Bali'),
+(4,13,'Jln. Tukad Batanghari ','Denpasar','Bali'),
+(5,15,'jln ,,,','Denpasar','Bali');
 
 /*Table structure for table `tb_carts` */
 
@@ -80,14 +48,15 @@ CREATE TABLE `tb_carts` (
   `prod_qty` int NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id_cart`)
-) ENGINE=InnoDB AUTO_INCREMENT=60 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=78 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 /*Data for the table `tb_carts` */
 
 insert  into `tb_carts`(`id_cart`,`id_user`,`id_produk`,`prod_qty`,`created_at`) values 
 (43,4,6,2,'2025-12-09 19:09:03'),
 (48,3,6,2,'2025-12-09 20:27:54'),
-(49,3,7,1,'2025-12-09 20:27:58');
+(49,3,7,1,'2025-12-09 20:27:58'),
+(66,8,32,5,'2026-01-05 00:48:28');
 
 /*Table structure for table `tb_kategori` */
 
@@ -106,7 +75,7 @@ CREATE TABLE `tb_kategori` (
   `meta_keywords` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id_kategori`)
-) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 /*Data for the table `tb_kategori` */
 
@@ -117,6 +86,26 @@ insert  into `tb_kategori`(`id_kategori`,`nama_kategori`,`slug`,`deskripsi`,`sta
 (20,'Apple Watch','Apple Watch','Smart, stylish, powerful',0,1,'1765093857.avif','Apple Watch','Smart, stylish, powerful','Apple Watch','2025-12-07 15:47:56'),
 (21,'Airpods','Airpods','Premium sound, ultimate focus',0,1,'1765093754.webp','Airpods','Premium sound, ultimate focus','Airpods','2025-12-07 15:49:14'),
 (22,'Aksesoris','Aksesoris','Crafted for seamless use.',0,1,'1765094145.webp','Aksesoris','Crafted for seamless use.','Aksesoris','2025-12-07 15:55:45');
+
+/*Table structure for table `tb_order_items` */
+
+DROP TABLE IF EXISTS `tb_order_items`;
+
+CREATE TABLE `tb_order_items` (
+  `id_order_item` int NOT NULL AUTO_INCREMENT,
+  `id_order` int NOT NULL,
+  `id_produk` int NOT NULL,
+  `qty` int NOT NULL,
+  `harga` int NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id_order_item`)
+) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+/*Data for the table `tb_order_items` */
+
+insert  into `tb_order_items`(`id_order_item`,`id_order`,`id_produk`,`qty`,`harga`,`created_at`) values 
+(36,24,34,6,16799000,'2026-01-07 15:48:37'),
+(37,25,32,1,21499000,'2026-01-07 15:57:24');
 
 /*Table structure for table `tb_orders` */
 
@@ -138,23 +127,13 @@ CREATE TABLE `tb_orders` (
   `comments` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id_order`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 /*Data for the table `tb_orders` */
 
 insert  into `tb_orders`(`id_order`,`no_tracking`,`id_user`,`nama_user`,`email`,`no_telp`,`alamat`,`pincode`,`total_harga`,`payment_mode`,`id_payment`,`status`,`comments`,`created_at`) values 
-(4,'aldyne7873727378382',4,'aldin','muhamadaldin@gmail.com','09727378382','timor',30494,66499000,'COD','',1,NULL,'2025-12-09 14:59:32'),
-(5,'7818988444',4,'aldin','muhamadaldin@gmail.com','03988444','timor',30494,16499000,'COD','',1,NULL,'2025-12-09 15:23:04'),
-(6,'886473837382',4,'suraz','paramasuraqutay@gmail.com','0873837382','sidakarya',2838822,17249000,'COD','',2,NULL,'2025-12-09 17:48:49'),
-(7,'9174988444',3,'anjing','muhamadaldin@gmail.com','03988444','anxcssxsx',30494,68246000,'COD','',0,NULL,'2025-12-09 18:40:54'),
-(8,'7516988444',3,'e','paramasuraqutay@gmail.com','03988444','timor',233,67496000,'COD','',0,NULL,'2025-12-09 20:24:45'),
-(9,'ORD20251209605',8,'babi','paramasuraqutay@gmail.com','03988444','njknjnjnsa',30494,91499000,'COD',NULL,0,NULL,'2025-12-09 20:50:54'),
-(10,'ORD20251209213',8,'babi','paramasuraqutay@gmail.com','03988444','njknjnjnsa',30494,91499000,'COD',NULL,0,NULL,'2025-12-09 20:52:03'),
-(11,'ORD20251209552',8,'anjing','muhamadaldin@gmail.com','03988444','eee',30494,16499000,'COD',NULL,0,NULL,'2025-12-09 20:53:09'),
-(12,'ORD20251226469',8,'nopal','abidian@gmail.com','0293883','1',9838383,18499000,'COD',NULL,0,NULL,'2025-12-26 22:57:37'),
-(13,'ORD20251226647',8,'nopal','abidian@gmail.com','0293883','2',9838383,36998000,'COD',NULL,0,NULL,'2025-12-26 23:48:29'),
-(14,'ORD20251226741',8,'lol','abidiannaufal450@gmail.com','0293883','1',9838383,18499000,'COD',NULL,0,NULL,'2025-12-26 23:50:00'),
-(15,'ORD20251226983',8,'nopal','abidian@gmail.com','0293883','1',9838383,128985000,'COD',NULL,0,NULL,'2025-12-26 23:53:17');
+(24,'ORD20260107479',13,'lol','abidiannaufal450@gmail.com','0293883','4',9838383,100794000,'Bank Transfer',NULL,3,NULL,'2026-01-07 15:48:37'),
+(25,'ORD20260107140',13,'a','abidiannaufal450@gmail.com','0293883','4',9838383,21499000,'Bank Transfer',NULL,4,NULL,'2026-01-07 15:57:24');
 
 /*Table structure for table `tb_orders_log` */
 
@@ -172,7 +151,39 @@ CREATE TABLE `tb_orders_log` (
 
 insert  into `tb_orders_log`(`order_id`,`log_sts`,`log_admin`,`keterangan`,`created_at`) values 
 (5,1,8,'zz mengubah status orderan dari 1 menjadi 0','2025-12-19 17:21:57'),
-(5,0,8,'zz mengubah status orderan dari 0 menjadi 1','2025-12-19 17:22:00');
+(5,0,8,'zz mengubah status orderan dari 0 menjadi 1','2025-12-19 17:22:00'),
+(16,0,8,'zz mengubah status orderan dari 0 menjadi 3','2026-01-04 22:59:41'),
+(17,0,8,'zz mengubah status orderan dari 0 menjadi 2','2026-01-04 23:11:46'),
+(17,2,8,'zz mengubah status orderan dari 2 menjadi 4','2026-01-04 23:11:54'),
+(17,4,8,'zz mengubah status orderan dari 4 menjadi 3','2026-01-04 23:12:02'),
+(17,3,8,'zz mengubah status orderan dari 3 menjadi 2','2026-01-04 23:12:22'),
+(17,2,8,'zz mengubah status orderan dari 2 menjadi 3','2026-01-04 23:12:34'),
+(17,3,8,'zz mengubah status orderan dari 3 menjadi 2','2026-01-04 23:15:42'),
+(17,2,8,'zz mengubah status orderan dari 2 menjadi 3','2026-01-04 23:16:11'),
+(17,3,8,'zz mengubah status orderan dari 3 menjadi 4','2026-01-04 23:17:44'),
+(17,4,8,'zz mengubah status orderan dari 4 menjadi 3','2026-01-04 23:17:51'),
+(23,0,15,'jawa mengubah status orderan dari 0 menjadi 0','2026-01-07 12:16:54'),
+(24,0,13,'hidup blonde mengubah status orderan dari 0 menjadi 4','2026-01-07 15:51:09'),
+(24,4,13,'hidup blonde mengubah status orderan dari 4 menjadi 3','2026-01-07 15:52:27'),
+(25,0,13,'hidup blonde mengubah status orderan dari 0 menjadi 3','2026-01-07 15:58:33'),
+(25,3,13,'hidup blonde mengubah status orderan dari 3 menjadi 4','2026-01-07 15:58:43');
+
+/*Table structure for table `tb_payment` */
+
+DROP TABLE IF EXISTS `tb_payment`;
+
+CREATE TABLE `tb_payment` (
+  `id_payment` int NOT NULL AUTO_INCREMENT,
+  `id_order` int DEFAULT NULL,
+  `no_tracking` varchar(255) DEFAULT NULL,
+  `bukti_pembayaran` varchar(255) DEFAULT NULL,
+  `rekening` varchar(255) DEFAULT NULL,
+  `status` int DEFAULT '0',
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id_payment`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+/*Data for the table `tb_payment` */
 
 /*Table structure for table `tb_produk` */
 
@@ -201,7 +212,6 @@ CREATE TABLE `tb_produk` (
 /*Data for the table `tb_produk` */
 
 insert  into `tb_produk`(`id_produk`,`nama_produk`,`slug`,`headline`,`deskripsi`,`harga_asli`,`harga_jual`,`gambar`,`id_kategori`,`qty`,`status`,`popularitas`,`meta_title`,`meta_description`,`meta_keywords`,`created_at`) values 
-(9,'EarPods (USB-C)','EarPods-(USB-C)','menyertakan remote bawaan yang memungkinkan Anda menyesuaikan volume, mengontrol pemutaran musik dan video, dan menjawab atau mengakhiri panggilan','Tidak seperti earbud bundar tradisional, desain EarPods ditentukan oleh geometri telinga. Sehingga lebih nyaman dipakai daripada headphone model earbud lainnya.\r\n\r\nSpeaker dalam EarPods dirancang untuk memaksimalkan output suara dengan perangkat favorit Anda, sehingga Anda selalu mendapatkan audio berkualitas tinggi.',359000,329000,'1766127997.jpeg',22,100,0,0,'EarPods (USB-C)','Tidak seperti earbud bundar tradisional, desain EarPods ditentukan oleh geometri telinga. Sehingga lebih nyaman dipakai daripada headphone model earbud lainnya.\r\n\r\nSpeaker dalam EarPods dirancang untuk memaksimalkan output suara dengan perangkat favorit Anda, sehingga Anda selalu mendapatkan audio berkualitas tinggi.','EarPods (USB-C)','2025-12-19 15:06:37'),
 (10,'140W USB-C Power Adapter','140W-USB-C-Power-Adapter','Adaptor Daya USB-C 140 W memberikan pengisian daya yang cepat dan efisien','Adaptor Daya USB-C 140 W memberikan pengisian daya yang cepat dan efisien di rumah, kantor, atau saat bepergian. Kompatibel dengan berbagai kabel pengisian daya USB-C. Apple menyarankan pemasangan adaptor daya ini dengan MacBook Pro 16 inci (2021) menggunakan Kabel USB-C ke MagSafe 3 untuk memanfaatkan kemampuan pengisian cepat, sehingga Anda bisa mendapatkan pengisian daya dari 0 menjadi 50 persen dalam waktu sekitar 30 menit.',1799000,1699000,'1766128146.jpeg',22,100,0,0,'140W USB-C Power Adapter','Adaptor Daya USB-C 140 W memberikan pengisian daya yang cepat dan efisien di rumah, kantor, atau saat bepergian. Kompatibel dengan berbagai kabel pengisian daya USB-C. Apple menyarankan pemasangan adaptor daya ini dengan MacBook Pro 16 inci (2021) menggunakan Kabel USB-C ke MagSafe 3 untuk memanfaatkan kemampuan pengisian cepat, sehingga Anda bisa mendapatkan pengisian daya dari 0 menjadi 50 persen dalam waktu sekitar 30 menit.','140W USB-C Power Adapter','2025-12-19 15:09:06'),
 (11,'Magic Mouse (USB-C)','Magic-Mouse-(USB-C)','Magic Mouse hadir tanpa kabel dan dapat diisi ulang','Magic Mouse hadir tanpa kabel dan dapat diisi ulang, dengan desain alas yang optimal, sehingga bisa meluncur tanpa hambatan di meja Anda. Permukaan Multi-Touch memungkinkan Anda melakukan gerakan sederhana, seperti mengusap pada halaman web dan menggulir dokumen.\r\nDengan baterai yang dapat diisi ulang, Magic Mouse bisa tahan selama satu bulan atau lebih. Magic Mouse siap untuk langsung digunakan dan otomatis melakukan pairing dengan Mac.\r\n\r\nMagic Mouse dilengkapi port USB-C dan disertai Kabel Pengisian Daya USB-C anyam yang memungkinkan Anda memasangkan dan mengisi daya dengan cara menyambungkan ke port USB-C pada Mac, sehingga Anda dapat mengisi daya semua perangkat favorit Anda hanya dengan satu kabel.',1899000,1799000,'1766128243.jpeg',22,100,0,0,'Magic Mouse (USB-C)','Magic Mouse hadir tanpa kabel dan dapat diisi ulang, dengan desain alas yang optimal, sehingga bisa meluncur tanpa hambatan di meja Anda. Permukaan Multi-Touch memungkinkan Anda melakukan gerakan sederhana, seperti mengusap pada halaman web dan menggulir dokumen.\r\nDengan baterai yang dapat diisi ulang, Magic Mouse bisa tahan selama satu bulan atau lebih. Magic Mouse siap untuk langsung digunakan dan otomatis melakukan pairing dengan Mac.\r\n\r\nMagic Mouse dilengkapi port USB-C dan disertai Kabel Pengisian Daya USB-C anyam yang memungkinkan Anda memasangkan dan mengisi daya dengan cara menyambungkan ke port USB-C pada Mac, sehingga Anda dapat mengisi daya semua perangkat favorit Anda hanya dengan satu kabel.','Magic Mouse (USB-C)','2025-12-19 15:10:43'),
 (12,'USB-C Digital AV Multiport Adapter','USB-C-Digital-AV-Multiport-Adapter','Dengan Adaptor Multiport AV Digital USB-C, Anda dapat menghubungkan Mac, iPad, atau iPhone yang memiliki port USB-C ke layar HDMI','Dengan Adaptor Multiport AV Digital USB-C, Anda dapat menghubungkan Mac, iPad, atau iPhone yang memiliki port USB-C ke layar HDMI, sekaligus menghubungkan perangkat USB standar dan kabel pengisi daya USB-C.\r\n\r\nAdaptor ini memungkinkan Anda menayangkan layar Mac, iPad, atau iPhone yang memiliki port USB-C ke TV atau layar dengan port HDMI.\r\n\r\n3840 x 2160 pada kecepatan 60 Hz pada:\r\niPhone 15, iPhone 15 Plus, iPhone 15 Pro, iPhone 15 Pro Max, iPad Air (generasi ke-5), iPad Pro 11-inci, iPad Pro 12,9 inci (generasi ke-3 dan lebih baru), MacBook Pro (16 inci, 2019), MacBook Pro (15 inci, 2017 dan lebih baru), MacBook Pro (13 inci, empat port Thunderbolt 3, 2020), MacBook Air (2020), iMac (Retina 5K, 27 inci, 2017 dan lebih baru), iMac (Retina 4K, 21,5 inci, 2017 dan lebih baru), dan iMac Pro (2017 dan lebih baru)\r\n\r\n1080p pada kecepatan 60 Hz atau UHD (3840 x 2160) pada kecepatan 30 Hz pada:\r\niPad Air (generasi ke-4), MacBook Air (2018 dan lebih baru), MacBook Pro (13 inci, 2016 dan lebih baru), MacBook Pro (15 inci, 2016), iMac (non-Retina, 21,5‑inci, 2017), dan Mac mini (2018)\r\n\r\nCukup hubungkan adaptor ke port USB-C atau Thunderbolt 3 (USB-C) pada Mac, iPad, atau iPhone, lalu ke TV atau proyektor melalui kabel HDMI (dijual terpisah).\r\n\r\nGunakan port USB standar untuk menghubungkan perangkat, seperti flash drive atau kamera atau kabel USB, untuk penyelarasan dan pengisian daya perangkat iOS. Anda juga bisa menghubungkan kabel pengisian daya ke port USB-C untuk mengisi daya Mac, iPad, atau iPhone.',1799000,1599000,'1766128421.jpeg',22,100,0,0,'USB-C Digital AV Multiport Adapter','Dengan Adaptor Multiport AV Digital USB-C, Anda dapat menghubungkan Mac, iPad, atau iPhone yang memiliki port USB-C ke layar HDMI, sekaligus menghubungkan perangkat USB standar dan kabel pengisi daya USB-C.\r\n\r\nAdaptor ini memungkinkan Anda menayangkan layar Mac, iPad, atau iPhone yang memiliki port USB-C ke TV atau layar dengan port HDMI.\r\n\r\n3840 x 2160 pada kecepatan 60 Hz pada:\r\niPhone 15, iPhone 15 Plus, iPhone 15 Pro, iPhone 15 Pro Max, iPad Air (generasi ke-5), iPad Pro 11-inci, iPad Pro 12,9 inci (generasi ke-3 dan lebih baru), MacBook Pro (16 inci, 2019), MacBook Pro (15 inci, 2017 dan lebih baru), MacBook Pro (13 inci, empat port Thunderbolt 3, 2020), MacBook Air (2020), iMac (Retina 5K, 27 inci, 2017 dan lebih baru), iMac (Retina 4K, 21,5 inci, 2017 dan lebih baru), dan iMac Pro (2017 dan lebih baru)\r\n\r\n1080p pada kecepatan 60 Hz atau UHD (3840 x 2160) pada kecepatan 30 Hz pada:\r\niPad Air (generasi ke-4), MacBook Air (2018 dan lebih baru), MacBook Pro (13 inci, 2016 dan lebih baru), MacBook Pro (15 inci, 2016), iMac (non-Retina, 21,5‑inci, 2017), dan Mac mini (2018)\r\n\r\nCukup hubungkan adaptor ke port USB-C atau Thunderbolt 3 (USB-C) pada Mac, iPad, atau iPhone, lalu ke TV atau proyektor melalui kabel HDMI (dijual terpisah).\r\n\r\nGunakan port USB standar untuk menghubungkan perangkat, seperti flash drive atau kamera atau kabel USB, untuk penyelarasan dan pengisian daya perangkat iOS. Anda juga bisa menghubungkan kabel pengisian daya ke port USB-C untuk mengisi daya Mac, iPad, atau iPhone.','USB-C Digital AV Multiport Adapter','2025-12-19 15:13:41'),
@@ -220,7 +230,7 @@ insert  into `tb_produk`(`id_produk`,`nama_produk`,`slug`,`headline`,`deskripsi`
 (25,'Magic Keyboard (USB-C)','Magic-Keyboard-(USB-C)','Magic Keyboard menghadirkan pengalaman pengetikan yang sangat nyaman dan presisi. ','Magic Keyboard menghadirkan pengalaman pengetikan yang sangat nyaman dan presisi. Magic Keyboard hadir tanpa kabel dan dapat diisi ulang, dengan baterai internal luar biasa tahan lama yang tahan selama satu bulan atau lebih.1 Magic Keyboard otomatis melakukan pairing dengan Mac Anda, jadi Anda dapat langsung menggunakannya.\r\n\r\nMagic Keyboard dilengkapi port USB-C dan disertai Kabel Pengisian Daya USB-C anyam yang memungkinkan Anda memasangkan dan mengisi daya dengan cara menyambungkan ke port USB-C pada Mac, sehingga Anda dapat mengisi daya semua perangkat favorit Anda hanya dengan satu kabel.',1799000,1699000,'1766130661.jpeg',22,156,0,0,'Magic Keyboard (USB-C)','Magic Keyboard menghadirkan pengalaman pengetikan yang sangat nyaman dan presisi. Magic Keyboard hadir tanpa kabel dan dapat diisi ulang, dengan baterai internal luar biasa tahan lama yang tahan selama satu bulan atau lebih.1 Magic Keyboard otomatis melakukan pairing dengan Mac Anda, jadi Anda dapat langsung menggunakannya.\r\n\r\nMagic Keyboard dilengkapi port USB-C dan disertai Kabel Pengisian Daya USB-C anyam yang memungkinkan Anda memasangkan dan mengisi daya dengan cara menyambungkan ke port USB-C pada Mac, sehingga Anda dapat mengisi daya semua perangkat favorit Anda hanya dengan satu kabel.','Magic Keyboard (USB-C)','2025-12-19 15:51:01'),
 (26,'Thunderbolt 4 USB-C Pro Cable (3m)','Thunderbolt 4-USB-C-Pro-Cable (3m)','mendukung transfer data Thunderbolt 3, Thunderbolt 4, dan USB 4 hingga 40 Gb/dtk, transfer data USB 3 hingga 10 Gb/dtk.','Dengan desain pilin hitam yang tidak kusut saat digulung, kabel sepanjang 3 meter ini mendukung transfer data Thunderbolt 3, Thunderbolt 4, dan USB 4 hingga 40 Gb/dtk, transfer data USB 3 hingga 10 Gb/dtk, output video DisplayPort (HBR3), dan pengisian daya hingga 100 W. Gunakan kabel ini untuk menghubungkan Mac dengan port Thunderbolt 3 atau 4 (USB-C) ke layar dan perangkat Thunderbolt (USB-C) dan USB seperti Studio Display, Pro Display XDR, dock, dan hard drive. Anda juga bisa menggunakan kabel ini untuk menghubungkan iPhone 15 Pro ke Mac.',2599000,2499000,'1766130762.jpeg',22,474,0,0,'Thunderbolt 4 USB-C Pro Cable (3m)','Dengan desain pilin hitam yang tidak kusut saat digulung, kabel sepanjang 3 meter ini mendukung transfer data Thunderbolt 3, Thunderbolt 4, dan USB 4 hingga 40 Gb/dtk, transfer data USB 3 hingga 10 Gb/dtk, output video DisplayPort (HBR3), dan pengisian daya hingga 100 W. Gunakan kabel ini untuk menghubungkan Mac dengan port Thunderbolt 3 atau 4 (USB-C) ke layar dan perangkat Thunderbolt (USB-C) dan USB seperti Studio Display, Pro Display XDR, dock, dan hard drive. Anda juga bisa menggunakan kabel ini untuk menghubungkan iPhone 15 Pro ke Mac.','Thunderbolt 4 USB-C Pro Cable (3m)','2025-12-19 15:52:42'),
 (27,'Thunderbolt 4 Pro Cable (1.8M)','Thunderbolt-4-Pro-Cable-(1.8M)','kabel sepanjang 3 meter ini mendukung transfer data Thunderbolt 3, Thunderbolt 4, dan USB 4 hingga 40 Gb/dtk, transfer data USB 3 hingga 10 Gb/dtk.','Dengan desain pilin hitam yang tidak kusut saat digulung, kabel sepanjang 3 meter ini mendukung transfer data Thunderbolt 3, Thunderbolt 4, dan USB 4 hingga 40 Gb/dtk, transfer data USB 3 hingga 10 Gb/dtk, output video DisplayPort (HBR3), dan pengisian daya hingga 100 W. Gunakan kabel ini untuk menghubungkan Mac dengan port Thunderbolt 3 atau 4 (USB-C) ke layar dan perangkat Thunderbolt (USB-C) dan USB seperti Studio Display, Pro Display XDR, dock, dan hard drive. Anda juga bisa menggunakan kabel ini untuk menghubungkan iPhone 15 Pro ke Mac.',2099000,1999000,'1766130878.jpg',22,742,0,0,'Thunderbolt 4 Pro Cable (1.8M)','Dengan desain pilin hitam yang tidak kusut saat digulung, kabel sepanjang 3 meter ini mendukung transfer data Thunderbolt 3, Thunderbolt 4, dan USB 4 hingga 40 Gb/dtk, transfer data USB 3 hingga 10 Gb/dtk, output video DisplayPort (HBR3), dan pengisian daya hingga 100 W. Gunakan kabel ini untuk menghubungkan Mac dengan port Thunderbolt 3 atau 4 (USB-C) ke layar dan perangkat Thunderbolt (USB-C) dan USB seperti Studio Display, Pro Display XDR, dock, dan hard drive. Anda juga bisa menggunakan kabel ini untuk menghubungkan iPhone 15 Pro ke Mac.','Thunderbolt 4 Pro Cable (1.8M)','2025-12-19 15:54:38'),
-(28,'USB C VGA Multiport Adapter','USB C VGA Multiport Adapter','Dengan Adaptor Multiport VGA USB-C, Anda dapat menghubungkan Mac dan iPad Pro yang memiliki port USB-C atau Thunderbolt 3 (USB-C) ke layar VGA, selagi juga menghubungkan perangkat USB standar dan kabel pengisi daya USB-C.','Adaptor Multiport VGA USB-C memungkinkan Anda menayangkan layar Mac atau iPad Pro ke TV atau layar dengan port VGA dalam format HD hingga 1080p. Adaptor ini juga menghasilkan output konten video seperti film dan video rekaman. Cukup hubungkan adaptor ke port USB-C atau Thunderbolt 3 (USB-C) pada Mac atau iPad, lalu ke TV atau proyektor melalui kabel VGA (dijual terpisah).\r\n\r\nGunakan port USB standar untuk menghubungkan perangkat seperti flash drive atau kamera atau kabel USB untuk penyelarasan dan pengisian daya iPhone, iPad, atau iPod. Anda juga bisa menghubungkan kabel pengisian daya ke port USB-C untuk mengisi daya Mac atau iPad Pro.',1599000,1499000,'1766130932.jpeg',22,246,0,0,'USB C VGA Multiport Adapter','Adaptor Multiport VGA USB-C memungkinkan Anda menayangkan layar Mac atau iPad Pro ke TV atau layar dengan port VGA dalam format HD hingga 1080p. Adaptor ini juga menghasilkan output konten video seperti film dan video rekaman. Cukup hubungkan adaptor ke port USB-C atau Thunderbolt 3 (USB-C) pada Mac atau iPad, lalu ke TV atau proyektor melalui kabel VGA (dijual terpisah).\r\n\r\nGunakan port USB standar untuk menghubungkan perangkat seperti flash drive atau kamera atau kabel USB untuk penyelarasan dan pengisian daya iPhone, iPad, atau iPod. Anda juga bisa menghubungkan kabel pengisian daya ke port USB-C untuk mengisi daya Mac atau iPad Pro.','USB C VGA Multiport Adapter','2025-12-19 15:55:32'),
+(28,'USB C VGA Multiport Adapter','USB C VGA Multiport Adapter','Dengan Adaptor Multiport VGA USB-C, Anda dapat menghubungkan Mac dan iPad Pro','Adaptor Multiport VGA USB-C memungkinkan Anda menayangkan layar Mac atau iPad Pro ke TV atau layar dengan port VGA dalam format HD hingga 1080p. Adaptor ini juga menghasilkan output konten video seperti film dan video rekaman. Cukup hubungkan adaptor ke port USB-C atau Thunderbolt 3 (USB-C) pada Mac atau iPad, lalu ke TV atau proyektor melalui kabel VGA (dijual terpisah).\r\n\r\nGunakan port USB standar untuk menghubungkan perangkat seperti flash drive atau kamera atau kabel USB untuk penyelarasan dan pengisian daya iPhone, iPad, atau iPod. Anda juga bisa menghubungkan kabel pengisian daya ke port USB-C untuk mengisi daya Mac atau iPad Pro.',1599000,1499000,'1766130932.jpeg',22,246,0,0,'USB C VGA Multiport Adapter','Adaptor Multiport VGA USB-C memungkinkan Anda menayangkan layar Mac atau iPad Pro ke TV atau layar dengan port VGA dalam format HD hingga 1080p. Adaptor ini juga menghasilkan output konten video seperti film dan video rekaman. Cukup hubungkan adaptor ke port USB-C atau Thunderbolt 3 (USB-C) pada Mac atau iPad, lalu ke TV atau proyektor melalui kabel VGA (dijual terpisah).\r\n\r\nGunakan port USB standar untuk menghubungkan perangkat seperti flash drive atau kamera atau kabel USB untuk penyelarasan dan pengisian daya iPhone, iPad, atau iPod. Anda juga bisa menghubungkan kabel pengisian daya ke port USB-C untuk mengisi daya Mac atau iPad Pro.','USB C VGA Multiport Adapter','2025-12-19 15:55:32'),
 (29,'Mac mini M4 Pro','Mac-min-M4-Pro','Sebuah device yang kecil dan simpel untuk di gunakan.','Sebuah device yang kecil dan simpel untuk digunakan dimana pun dan tidak memakan ruang yang banyak dengan spesifikasi menggunakan Apple M4 Pro Chip (CPU 12-Core, GPU 16-Core), dengan memori 24 GB dan penyimpanan 512GB dan juga memiliki koneksi Wi-Fi +Ethernet',23499000,22999000,'1766131968.jpeg',17,133,0,1,'Mac mini M4 Pro','Sebuah device yang kecil dan simpel untuk digunakan dimana pun dan tidak memakan ruang yang banyak dengan spesifikasi menggunakan Apple M4 Pro Chip (CPU 12-Core, GPU 16-Core), dengan memori 24 GB dan penyimpanan 512GB dan juga memiliki koneksi Wi-Fi +Ethernet','Mac mini M4 Pro','2025-12-19 16:12:48'),
 (30,'Mac mini M4 ','Mac-mini-M4','Sebuah device yang kecil dan simpel untuk digunakan.','Sebuah device yang kecil dan simpel untuk digunakan dimana pun dan tidak memakan ruang yang banyak dengan spesifikasi menggunakan Apple M4 Pro Chip (CPU 12-Core, GPU 16-Core), dengan memori 24 GB dan penyimpanan 512GB dan juga memiliki koneksi Wi-Fi +Ethernet',23499000,22999000,'1766132308.jpeg',17,547,0,1,'Mac mini M4 ','Sebuah device yang kecil dan simpel untuk digunakan dimana pun dan tidak memakan ruang yang banyak dengan spesifikasi menggunakan Apple M4 Pro Chip (CPU 12-Core, GPU 16-Core), dengan memori 24 GB dan penyimpanan 512GB dan juga memiliki koneksi Wi-Fi +Ethernet','Mac mini M4 ','2025-12-19 16:18:28'),
 (31,'24-inch iMac with Retina 4.5K display M3','24-inch-iMac-with-Retina-4.5K-display-M3','iMac 24-inch M3 adalah komputer desktop all-in-one yang kuat.','iMac 24-inch M3 adalah komputer desktop all-in-one yang ringkas dan kuat, ditenagai chip Apple M3 untuk performa lebih cepat dalam tugas sehari-hari, desain ikonik tipis penuh warna, Layar Retina 4.5K 24 inci cemerlang dengan warna luas (P3) dan True Tone, dilengkapi kamera 1080p, mikrofon berkualitas studio, sistem speaker enam speaker, Magic Keyboard & Mouse warna senada, serta berbagai opsi RAM (8GB/16GB), penyimpanan (256GB/512GB/1TB/2TB SSD), dan port (2 atau 4 port Thunderbolt/USB 4), menjadikannya ideal untuk kreativitas dan produktivitas dengan ekosistem Apple yang terintegrasi. ',22499000,18499000,'1766132575.jpeg',17,611,0,1,'24-inch iMac with Retina 4.5K display M3','iMac 24-inch M3 adalah komputer desktop all-in-one yang ringkas dan kuat, ditenagai chip Apple M3 untuk performa lebih cepat dalam tugas sehari-hari, desain ikonik tipis penuh warna, Layar Retina 4.5K 24 inci cemerlang dengan warna luas (P3) dan True Tone, dilengkapi kamera 1080p, mikrofon berkualitas studio, sistem speaker enam speaker, Magic Keyboard & Mouse warna senada, serta berbagai opsi RAM (8GB/16GB), penyimpanan (256GB/512GB/1TB/2TB SSD), dan port (2 atau 4 port Thunderbolt/USB 4), menjadikannya ideal untuk kreativitas dan produktivitas dengan ekosistem Apple yang terintegrasi. ','24-inch iMac with Retina 4.5K display M3','2025-12-19 16:22:55'),
@@ -228,6 +238,23 @@ insert  into `tb_produk`(`id_produk`,`nama_produk`,`slug`,`headline`,`deskripsi`
 (33,'15-inch MacBook Air','15-inch-MacBook-Air','laptop tipis dan ringan dengan layar Liquid Retina 15,3 inci yang imersif.','laptop tipis dan ringan dengan layar Liquid Retina 15,3 inci yang imersif, ditenagai oleh chip Apple M-series (M3 atau M4 terbaru), menawarkan kinerja cepat untuk tugas sehari-hari, daya tahan baterai sepanjang hari (hingga 18 jam), desain portabel dengan ketebalan hanya 1,15 cm, serta dilengkapi port MagSafe, Thunderbolt, dan jack headphone',21499000,20999000,'1766133495.jpeg',17,631,0,1,'15-inch MacBook Air','laptop tipis dan ringan dengan layar Liquid Retina 15,3 inci yang imersif, ditenagai oleh chip Apple M-series (M3 atau M4 terbaru), menawarkan kinerja cepat untuk tugas sehari-hari, daya tahan baterai sepanjang hari (hingga 18 jam), desain portabel dengan ketebalan hanya 1,15 cm, serta dilengkapi port MagSafe, Thunderbolt, dan jack headphone','15-inch MacBook Air','2025-12-19 16:38:15'),
 (34,'13-inch MacBook Air','13-inch-MacBook-Air','laptop ultra-portabel dari Apple yang dikenal tipis, ringan, bertenaga','laptop ultra-portabel dari Apple yang dikenal tipis, ringan, bertenaga (terutama dengan chip Apple Silicon seperti M1/M2/M4), memiliki Layar Liquid Retina yang cerah (mendukung miliaran warna, True Tone), desain tanpa kipas (silent), daya tahan baterai luar biasa, serta fitur seperti kamera FaceTime HD, speaker stereo, dan berbagai pilihan konektivivitas (Thunderbolt/USB-C, MagSafe) untuk produktivitas sehari-hari dan tugas kreatif ringan dalam paket yang elegan dan ringkas.',17999000,16799000,'1766133592.jpeg',17,342,0,1,'13-inch MacBook Air','laptop ultra-portabel dari Apple yang dikenal tipis, ringan, bertenaga (terutama dengan chip Apple Silicon seperti M1/M2/M4), memiliki Layar Liquid Retina yang cerah (mendukung miliaran warna, True Tone), desain tanpa kipas (silent), daya tahan baterai luar biasa, serta fitur seperti kamera FaceTime HD, speaker stereo, dan berbagai pilihan konektivivitas (Thunderbolt/USB-C, MagSafe) untuk produktivitas sehari-hari dan tugas kreatif ringan dalam paket yang elegan dan ringkas.','13-inch MacBook Air','2025-12-19 16:39:52'),
 (35,'13-inch MacBook Air (M1 Chip)','13-inch-MacBook-Air-(M1 Chip)','laptop tipis dan ringan dari Apple yang bertenaga oleh chip Apple M1','laptop tipis dan ringan dari Apple yang bertenaga oleh chip Apple M1 (CPU 8-core, GPU hingga 8-core), menawarkan performa cepat dan efisien energi tanpa kipas untuk tugas sehari-hari, dengan daya tahan baterai hingga 18 jam, Layar Retina 13,3 inci dengan True Tone, Touch ID, dan port Thunderbolt/USB 4.',15999000,11499000,'1766133703.jpeg',17,234,0,1,'13-inch MacBook Air (M1 Chip)','laptop tipis dan ringan dari Apple yang bertenaga oleh chip Apple M1 (CPU 8-core, GPU hingga 8-core), menawarkan performa cepat dan efisien energi tanpa kipas untuk tugas sehari-hari, dengan daya tahan baterai hingga 18 jam, Layar Retina 13,3 inci dengan True Tone, Touch ID, dan port Thunderbolt/USB 4','13-inch MacBook Air (M1 Chip)','2025-12-19 16:41:43');
+
+/*Table structure for table `tb_role` */
+
+DROP TABLE IF EXISTS `tb_role`;
+
+CREATE TABLE `tb_role` (
+  `id_role` int NOT NULL,
+  `nama_role` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id_role`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+/*Data for the table `tb_role` */
+
+insert  into `tb_role`(`id_role`,`nama_role`) values 
+(0,'Klien'),
+(1,'Admin'),
+(2,'Pekerja');
 
 /*Table structure for table `tb_user` */
 
@@ -242,7 +269,7 @@ CREATE TABLE `tb_user` (
   `role` tinyint NOT NULL DEFAULT '0',
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id_user`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 /*Data for the table `tb_user` */
 
@@ -256,7 +283,11 @@ insert  into `tb_user`(`id_user`,`nama_user`,`email`,`no_telp`,`password`,`role`
 (9,'E','anjing@gmail.com','343','$2y$10$Ca.iaWIE65J4Dn/t1SLlD.rclqMMxxAzHZr/cdmIp1.EyGeL7S1U2',0,'2025-12-09 15:45:42'),
 (10,'wiwir','wir@gmail.com','083119973105','$2y$10$5oih6pNsDL5PKLTBIZ.LR.8n/cFCjYmVQQND4U3X0XQyi2RTxpfK6',1,'2025-12-19 15:39:57'),
 (11,'awir2','awiwir@gmial.com','083119924110','$2y$10$DgdhAj1/S0cREgbZZc7uS.C7cBvCdyFRw.YMqeRm/kZJgClkk9om2',0,'2025-12-19 16:23:49'),
-(12,'aldin boty','emut123@gmail.com','0987654321','$2y$10$S.AUF2M9Wkb9wJzsQhqTXO/LghPLiLWPchWF1SPMG.dS29fRkzEZC',0,'2025-12-27 01:16:07');
+(12,'aldin boty','emut123@gmail.com','0987654321','$2y$10$S.AUF2M9Wkb9wJzsQhqTXO/LghPLiLWPchWF1SPMG.dS29fRkzEZC',0,'2025-12-27 01:16:07'),
+(13,'hidup blonde','a@gmail.com','0873388373','$2y$10$mu0d15ees0BLQ5P4gkRAuew37.VyRgvjz/NaPoScw5FE8t9R42Ema',2,'2025-12-27 20:34:51'),
+(14,'jawa','1111@11','123','$2y$10$1LOuDvUdcdQzcy4sLXyuWe5YUS.RtVfb1YIZE1bbh91xFAHCz0FhK',0,'2025-12-28 15:41:04'),
+(15,'jawa','longor@gmail.com','1','$2y$10$2NZ7tP0WqH2Dq8Jc6tIf8.wysHvwY4w0.H//guzPtrhamW4zO3AXu',1,'2026-01-03 20:33:18'),
+(16,'hidup lonte','Arwi@gmail.com','0872732723','$2y$10$7Dv2YNOCO5Mx4Qew0guYm.lz0KO5I6erB34fVHHQwSVzLgQ.DKDWi',0,'2026-01-07 15:30:30');
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
