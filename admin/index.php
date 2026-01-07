@@ -34,7 +34,7 @@ $topProducts = getTopProducts(5);
 
 $uploadedPayments = getUploadedPayments();
 
-$todayLogsCount = getTodayLogsCount();
+$todayLogsCount = getLast24HoursLogs();
 
 function labelStatus($status) {
     switch ($status) {
@@ -91,7 +91,7 @@ function labelStatus($status) {
 
 
     <div class="bg-yellow-100 border border-yellow-400 text-yellow-700 px-6 py-4 rounded-lg mb-8">
-        <strong>Informasi!</strong> Ada <?= $todayLogsCount ?> order log yang dibuat hari ini.
+        <strong>Informasi!</strong> Ada <?= mysqli_num_rows($todayLogsCount) ?>  order log yang dibuat hari ini.
     </div>
 
 

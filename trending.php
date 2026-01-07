@@ -15,16 +15,11 @@ $user = new User();
 
                 <?php
                 $trending = $user->getTrending();
-                $counttrending = 1;
-                $maxtrending = 8;
+
 
                 if (!empty($trending)) {
                     foreach ($trending as $item) {
-                        if ($counttrending > $maxtrending) {
-                            break;
-                        } else {
-                            $counttrending++;
-                        }
+
 
                 ?>
                         <a href="product-view.php?product=<?= $item['slug'] ?>" class="group block">

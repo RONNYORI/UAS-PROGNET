@@ -57,7 +57,7 @@ class User extends Database {
     }
 
 public function getAllProducts(){
-    $query = "SELECT * FROM tb_produk ORDER BY created_at DESC";
+    $query = "SELECT * FROM tb_produk ORDER BY RAND()";
     $stmt = $this->conn->prepare($query);
 
     if(!$stmt){
